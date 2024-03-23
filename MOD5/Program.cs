@@ -1,19 +1,41 @@
 ﻿namespace MOD5_1302223012
 {
-    public class Penjumlahan<T>
-    {
-        public T JumlahTigaAngka<T>(T angka1, T angka2, T angka3) where T : IAdditionOperators<T, T, T>
-        {
-            return angka1 + angka2 + angka3;
-        }
-    }
     internal class Program
     {
+        class SimpleDataBase<T>
+        {
+            List<T> storedData { get; set; }
+            List<DateTime> inputDates { get; set; }
+
+
+            public SimpleDataBase()
+            {
+                storedData = new List<T>();
+                inputDates = new List<DateTime>();
+            }
+            public void AddNewData(T list)
+            {
+                storedData.Add(list);
+                inputDates.Add(DateTime.Now);
+            }
+            public void printAllData()
+            {
+                for (int i = 0; i < storedData.Count; i++)
+                {
+                    Console.WriteLine("Data " + i + " berisi : " + storedData[i] + " yang disimpan pada waktu " + inputDates[i]);
+                }
+            }
+        }
+
+
+
         static void Main(string[] args)
         {
-            Penjumlahan<float> JumlahTigaAngka = new Penjumlahan<float>();
-
-            Console.WriteLine(JumlahTigaAngka.JumlahTigaAngka(13, 02, 22));
+            SimpleDataBase<int> Data = new SimpleDataBase<int>();
+            Data.AddNewData(13); Data.AddNewData(02); Data.AddNewData(22);
+            Data.printAllData();
+            Console.ReadLine();
         }
+
     }
 }
